@@ -18,8 +18,8 @@ var basicCard8 = new basicCard("What type of galaxy is the most common in the un
 var basicCard9 = new basicCard("The hottest place in the universe is located in which constellation?", "virgo");
 var basicCard10 = new basicCard("What is the most common type of star found in the Milky Way?", "red dwarf stars");
 
-var clozeCard1 = new clozeCard("... is the most common type of galaxy in the universe.", "elliptical");
-var clozeCard2 = new clozeCard("... is the molecular formula for methane.", "ch4");
+var clozeCard1 = new clozeCard("Elliptical galaxies are the most common type in the universe.", "elliptical");
+var clozeCard2 = new clozeCard("CH4 is the molecular formula for methane.", "ch4");
 
 // Push cards into respective arrays //
 
@@ -88,23 +88,25 @@ function basicFlash() {
 }
 
 function clozeFlash() {
-    if (cardCount < cards.length) {
+    if (cardCount < clozeCards.length) {
         inquirer.prompt([
             {
-                name: "partial",
-                message: cards[cardCount].text
+                type: "input",
+                name: "question",
+                message: clozeCards[cardCount].partial
             }
         ]).then(function (answer) {
-            if ((answer.partial).toLowerCase() === cards[cardCount].cloze) {
-                console.log("correct");
+            if ((answer.question).toLowerCase() === clozeCards[cardCount].cloze) {
+                console.log("Correct!");
+                console.log(clozeCards[cardCount].fullText);
                 cardCount++
-                flash();
+                clozeFlash();
             }
             else {
-                console.log("incorrect");
-                cards[cardCount].full();
+                console.log("Incorrect :(");
+                console.log(clozeCards[cardCount].fullText);
                 cardCount++
-                flash();
+                clozeFlash();
             }
         });
     }

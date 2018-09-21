@@ -1,14 +1,7 @@
-var clozeText
-
 function ClozeCard(text, cloze) {
-	this.text = text
-	this.cloze = cloze
-	this.fullText = text
+	this.fullText = text,
+	this.cloze = cloze,
+	this.partial = text.replace(cloze, "...")
 }
 
-ClozeCard.prototype.full = function() {
-	clozeDeleted = this.cloze
-	clozeText = this.text
-	clozeText = clozeText.replace("...", clozeDeleted);
-	console.log(clozeText);
-}
+module.exports = ClozeCard;
